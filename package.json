@@ -1,0 +1,30 @@
+{
+  "name": "react-starter",
+  "version": "1.0.0",
+  "description": "This is a starter react project",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jubilee5/react-starter.git"
+  },
+  "keywords": [],
+  "author": "Jubilee Sharma",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jubilee5/react-starter/issues"
+  },
+  "homepage": "https://github.com/jubilee5/react-starter#readme",
+  "devDependencies": {
+    "parcel": "^2.16.4",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ]
+}
