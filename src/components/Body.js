@@ -1,6 +1,7 @@
 import RestaurantCard from "./RestaurantCard";
 import { useState , useEffect } from "react";
 //import resList from "../utils/mockData";
+import Shimmer from "./Shimmer";
 
 const Body = () => {
     //local state variable - super powerful variable
@@ -31,6 +32,10 @@ const Body = () => {
 
     setListOfRestaurants(restaurants);
 };
+
+if (listOfRestaurants.length === 0) {
+    return <Shimmer />;
+}
 
     // console.log("Body rendered"); // This will be called every time the component is rendered. It is used to check if the component is re-rendering or not. We can see that the component is re-rendering when we click on the filter button because we are updating the state. this will render first and then useEffect will be called.
 
