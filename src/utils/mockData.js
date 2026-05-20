@@ -1,79 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-
-/**
- * Header
- *  -logo
- * -nav items
- * Body 
- * - search bar
- * - restaurantContainer
- * - restaurantCard
- *       -Img
- *       -Name of res, cuisine, rating, delivery time
- * Footer
- * - copyright
- * - links
- * - address
- * - contact
- */ 
-
-
-const Header = () => {
-    return (
-        <div className="header">
-            <div className="logo-container">
-                <img className="logo" src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png" alt="logo"/>
-            </div>
-            <div className="nav-items">
-                <ul>
-                    <li>Home</li>
-                    <li>About Us</li>
-                    <li>Contact Us</li>
-                    <li>Cart</li>
-                </ul>
-            </div>
-        </div>
-    );
-};
-
-const RestaurantCard = (props) => {
-    const { resData } = props; // Destructuring props to get restaurant data
-
-    const {
-        cloudinaryImageId,
-        name,
-        avgRating,
-        cuisines,
-        costForTwo, 
-        rating, 
-        deliveryTime,
-        } = resData;    // Destructuring props for better readability
-    
-    
-        return (
-        <div className="res-card" style={{backgroundColor: "#f0f0f0"}}>  
-             <img 
-            className="res-logo" src = {cloudinaryImageId} alt="res-logo"
-             />
-            <h3>{name}</h3>
-            <h4>{cuisines.join(", ")}</h4>
-            <h4>{avgRating} stars</h4>
-            <h4>{costForTwo} For Two</h4>
-            <h4>{deliveryTime} mins</h4>
-        </div>
-    );
-};
-
-const resList = [
-    
+const resList = [ 
                     
   {
     type: "restaurant",
     "data": {
       "id": "101",
       "name": "Pizza Paradise",
-      "cloudinaryImageId": "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500",
+      "cloudinaryImageId": "1513104890138-7c749659a591?w=500",
       "locality": "MG Road",
       "areaName": "Central District",
       "costForTwo": "₹400 for two",
@@ -99,7 +31,7 @@ const resList = [
     "data": {
       "id": "102",
       "name": "Burger Hub",
-      "cloudinaryImageId": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500",
+      "cloudinaryImageId": "1568901346375-23c9450c58cd?w=500",
       "locality": "Park Street",
       "areaName": "Downtown",
       "costForTwo": "₹300 for two",
@@ -125,7 +57,7 @@ const resList = [
     "data": {
       "id": "103",
       "name": "Green Bites",
-      "cloudinaryImageId": "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=500",
+      "cloudinaryImageId": "1540189549336-e6e99c3679fe?w=500",
       "locality": "Residency Road",
       "areaName": "South Zone",
       "costForTwo": "₹250 for two",
@@ -151,7 +83,7 @@ const resList = [
     "data": {
       "id": "104",
       "name": "Spice Kingdom",
-      "cloudinaryImageId": "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=500",
+      "cloudinaryImageId": "1585937421612-70a008356fbe?w=500",
       "locality": "Brigade Road",
       "areaName": "City Center",
       "costForTwo": "₹500 for two",
@@ -177,7 +109,7 @@ const resList = [
     "data": {
       "id": "105",
       "name": "Dessert Delight",
-      "cloudinaryImageId": "https://images.unsplash.com/photo-1551024601-bec78aea704b?w=500",
+      "cloudinaryImageId": "1551024601-bec78aea704b?w=500",
       "locality": "Lavelle Road",
       "areaName": "West End",
       "costForTwo": "₹200 for two",
@@ -203,7 +135,7 @@ const resList = [
   "data": {
     "id": "107",
     "name": "Coffee Corner",
-    "cloudinaryImageId": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=500",
+    "cloudinaryImageId": "1509042239860-f550ce710b93?w=500",
     "locality": "Hill Road",
     "areaName": "North Avenue",
     "costForTwo": "₹250 for two",
@@ -228,7 +160,7 @@ const resList = [
   "data": {
     "id": "108",
     "name": "BBQ Nation",
-    "cloudinaryImageId": "https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=500",
+    "cloudinaryImageId": "1529193591184-b1d58069ecdd?w=500",
     "locality": "Lake View",
     "areaName": "City Plaza",
     "costForTwo": "₹700 for two",
@@ -253,7 +185,7 @@ const resList = [
   "data": {
     "id": "109",
     "name": "Waffle World",
-    "cloudinaryImageId": "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?w=500",
+    "cloudinaryImageId": "1504754524776-8f4f37790ca0?w=500",
     "locality": "Palm Street",
     "areaName": "East End",
     "costForTwo": "₹280 for two",
@@ -278,7 +210,7 @@ const resList = [
   "data": {
     "id": "110",
     "name": "Dragon Wok",
-    "cloudinaryImageId": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=500",
+    "cloudinaryImageId": "1512058564366-18510be2db19?w=500",
     "locality": "Market Road",
     "areaName": "Chinatown",
     "costForTwo": "₹450 for two",
@@ -298,34 +230,6 @@ const resList = [
     }
   }
 },
-
 ];
-                
 
-const Body = () => {
-    return (
-        <div className="body">
-            <div className="search"> Search</div>
-            <div className="res-container"> 
-                   {resList.map((restaurant) => (
-                    <RestaurantCard key={restaurant.data.id} resData={restaurant.data} />
-                ))}
-                    
-            </div>
-        </div>
-    );
-};
-                
-         
-
-const AppLayout = () => {
-    return (
-        <div className="app">
-            <Header />
-            <Body />    
-        </div>
-    );
-};
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<AppLayout />);
+export default resList;
