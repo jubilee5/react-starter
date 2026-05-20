@@ -10,8 +10,8 @@ const RestaurantCard = (props) => {
         cuisines,
         costForTwo, 
         rating, 
-        deliveryTime,
-        } = resData?.data;    // Destructuring props for better readability
+        sla,
+        } = resData?.info || {};    // Destructuring props for better readability
     
     
         return (
@@ -20,10 +20,10 @@ const RestaurantCard = (props) => {
             className="res-logo" src = {CON_URL + cloudinaryImageId} alt="res-logo"
              />
             <h3>{name}</h3>
-            <h4>{cuisines.join(", ")}</h4>
+            <h4>{cuisines?.join(", ")}</h4>
             <h4>{avgRating} stars</h4>
             <h4>{costForTwo} For Two</h4>
-            <h4>{deliveryTime} mins</h4>
+            <h4>{sla?.deliveryTime} mins</h4>
         </div>
     );
 };
