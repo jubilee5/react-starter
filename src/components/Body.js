@@ -7,6 +7,11 @@ const Body = () => {
     //local state variable - super powerful variable
     const [listOfRestaurants, setListOfRestaurants] = useState([]); // useState is a hook that allows us to add state to our functional components. It returns an array with two elements - the current state and a function to update the state. We can use array destructuring to get these two elements. Here we are initializing the state with the resList which is an array of restaurant objects. We can update this state using the setListOfRestaurants function. Whenever we update the state, the component will re-render and we will see the updated list of restaurants. 
 
+    const [filteredRestaurant, setFilteredRestaurant] = useState([]); // This state variable is used to store the filtered list of restaurants based on the search text. We can update this state variable when the user clicks on the search button. We can also use this state variable to show the filtered list of restaurants in the UI.
+
+    const [searchText, setSearchText] = useState(""); 
+    console.log("Body rendered"); 
+
     useEffect(() => {
        // console.log("useEffect called");
        fetchData();
@@ -31,6 +36,7 @@ const Body = () => {
             ?.card?.card?.gridElements?.infoWithStyle?.restaurants || [];
 
     setListOfRestaurants(restaurants);
+    setFilteredRestaurant(restaurants);
 };
 
 // Conditional rendering - if restaurant list is empty then show shimmer UI otherwise show the restaurant cards. This is a common pattern in React applications to show a loading state while the data is being fetched. We can also show an error message if there is an error while fetching the data.
@@ -43,6 +49,30 @@ const Body = () => {
     return listOfRestaurants.length === 0 ? <Shimmer/> : (      //using ternary operator for conditional rendering.
         <div className="body">
             <div className="filter">
+                <div className="search">
+                    <input type="text" 
+                    placeholder="Search for restaurants..." 
+                    value={searchText} 
+                    onChange={(e) => {
+                        setSearchText(e.target.value);
+                    }}
+                     />     
+                    {/* placeholder is used to show a hint to the user about what to enter in the input field.
+                     value is the current value of the input field 
+                     onChange is called when the user types in the input field
+                     e.target.value is the new value of the input field */}
+                    <button 
+                        onClick={() => {
+                            //filter restaurant cards based on search text and update the ui
+                        console.log(searchText);
+                        const filteredRestaurant = listOfRestaurants.filter((res) =>
+                            res.info.name.toLowerCase().includes(searchText.toLowerCase())
+                        );
+                        setFilteredRestaurant(filteredRestaurant);
+
+                        }}>
+                        Search</button>
+                </div>
                 <button 
                     className="filter-btn"
                     onClick={() => {
@@ -56,7 +86,7 @@ const Body = () => {
                     </button>
             </div>
             <div className="res-container"> 
-                   {listOfRestaurants
+                   {filteredRestaurant
     ?.filter((restaurant) => restaurant?.info?.id)
     ?.map((restaurant) => (
         <RestaurantCard
