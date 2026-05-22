@@ -35,3 +35,10 @@ import {Component } from "path";
 (Normal JS utility functions)
 - useState() - superpowerful react variables
 - useEffect() -  comes with two parameters - a callback function and a dependency array. The callback function is called when the component is mounted and whenever the dependencies in the dependency array change. If the dependency array is empty, then the callback function is called only once when the component is mounted. This is useful for fetching data from an API when the component is first rendered. In this case, we are calling the fetchData function which fetches the list of restaurants from the API and updates the state with the fetched data.
+
+# 2 types Routing in web apps
+
+- client side routing - React changes components WITHOUT reloading page.
+Only data/UI changes.
+- server side routing - Every time you change page, request goes to server.
+The server sends a completely new HTML page.Browser reloads entire page.

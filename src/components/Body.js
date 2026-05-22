@@ -2,6 +2,7 @@ import RestaurantCard from "./RestaurantCard";
 import { useState , useEffect } from "react";
 //import resList from "../utils/mockData";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const Body = () => {
     //local state variable - super powerful variable
@@ -88,11 +89,13 @@ const Body = () => {
             <div className="res-container"> 
                    {filteredRestaurant
     ?.filter((restaurant) => restaurant?.info?.id)
-    ?.map((restaurant) => (
-        <RestaurantCard
+   ?.map((restaurant) => (
+        <Link
             key={restaurant.info.id}
-            resData={restaurant}
-        />
+            to={"/restaurant/" + restaurant.info.id}
+        >
+            <RestaurantCard resData={restaurant} />
+        </Link>
 ))}    
 
  {/* not using a key prop will give us a warning in the console. It is used by react to identify which items have changed, are added or removed. It should be a unique value. Here we can use restaurant id as key prop. if we don't have unique id then we can use index as key prop but it is not recommended because it can cause performance issues and bugs in some cases. 
