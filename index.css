@@ -89,3 +89,9 @@
     margin : 5px;
     gap: 10px;
 }
+
+.login {
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+}
