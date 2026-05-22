@@ -15,12 +15,12 @@ const Body = () => {
     useEffect(() => {
        // console.log("useEffect called");
        fetchData();
-    }, []);
+    }, []); // comes with two arguments - a callback function and a dependency array. 
 
     const fetchData = async () => {
 
     const data = await fetch(
-        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=26.7509&lng=94.2037&page_type=DESKTOP_WEB_LISTING"
+        "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=26.7509&lng=94.2037&page_type=DESKTOP_WEB_LISTING"
     );
 
     const json = await data.json();
