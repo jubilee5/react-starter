@@ -3,6 +3,7 @@ import { useState , useEffect } from "react";
 //import resList from "../utils/mockData";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
     //local state variable - super powerful variable
@@ -39,6 +40,14 @@ const Body = () => {
     setListOfRestaurants(restaurants);
     setFilteredRestaurant(restaurants);
 };
+
+const onlineStatus = useOnlineStatus();
+
+if (onlineStatus === false) {
+    return (
+        <h1> Looks like you are offline. Please check your internet connection. </h1>
+    );
+}
 
 // Conditional rendering - if restaurant list is empty then show shimmer UI otherwise show the restaurant cards. This is a common pattern in React applications to show a loading state while the data is being fetched. We can also show an error message if there is an error while fetching the data.
 // if (listOfRestaurants.length === 0) {
