@@ -8,7 +8,7 @@ const User = ({name}) => {
         console.log("Child useEffect called");
     }, []); 
   return (
-    <div className="user-card">
+    <div className="user-card m-4 p-4 w-36 bg-gray-100 rounded-lg hover:bg-gray-200">
         <h2>  Name : {name} </h2>
         <h3> Email : jubilee.sharma@gmail.com </h3>
             <h3> Location : Assam </h3>

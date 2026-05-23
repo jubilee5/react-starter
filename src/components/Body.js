@@ -1,9 +1,10 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, {withPromotedLabel} from "./RestaurantCard";
 import { useState , useEffect } from "react";
 //import resList from "../utils/mockData";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+
 
 const Body = () => {
     //local state variable - super powerful variable
@@ -13,6 +14,8 @@ const Body = () => {
 
     const [searchText, setSearchText] = useState(""); 
     console.log("Body rendered"); 
+
+    const RestaurantCardPromoted = withPromotedLabel(RestaurantCard); // This is a higher order component. It is a function that takes a component as an argument and returns a new component. Here we are creating a new component called RestaurantCardPromoted which is a promoted version of the RestaurantCard component. We can use this new component in our UI to show the promoted restaurants.
 
     useEffect(() => {
        // console.log("useEffect called");
@@ -58,9 +61,10 @@ if (onlineStatus === false) {
 
     return listOfRestaurants.length === 0 ? <Shimmer/> : (      //using ternary operator for conditional rendering.
         <div className="body">
-            <div className="filter">
-                <div className="search">
+            <div className="filter flex  items-center">
+                <div className="search m-4 p-4">
                     <input type="text" 
+                    className=" border border-solid border-black"
                     placeholder="Search for restaurants..." 
                     value={searchText} 
                     onChange={(e) => {
@@ -71,7 +75,7 @@ if (onlineStatus === false) {
                      value is the current value of the input field 
                      onChange is called when the user types in the input field
                      e.target.value is the new value of the input field */}
-                    <button 
+                    <button className="px-2 m-2 bg-green-100 rounded-lg"
                         onClick={() => {
                             //filter restaurant cards based on search text and update the ui
                         console.log(searchText);
@@ -84,7 +88,7 @@ if (onlineStatus === false) {
                         Search</button>
                 </div>
                 <button 
-                    className="filter-btn"
+                    className="px-2 m-2 bg-gray-100 rounded-lg"
                     onClick={() => {
                     const filteredlist = listOfRestaurants.filter(
                         (res) => res.info.avgRating > 4.0
@@ -95,7 +99,7 @@ if (onlineStatus === false) {
                     Top Rated Restaurants
                     </button>
             </div>
-            <div className="res-container"> 
+            <div className="flex flex-wrap"> 
                    {filteredRestaurant
     ?.filter((restaurant) => restaurant?.info?.id)
    ?.map((restaurant) => (
@@ -103,7 +107,12 @@ if (onlineStatus === false) {
             key={restaurant.info.id}
             to={"/restaurant/" + restaurant.info.id}
         >
-            <RestaurantCard resData={restaurant} />
+            {/** if the restaurant is promoted, then add a promoted label to it */}
+            {restaurant.info.isOpen ? ( //in the swiggy api, the promoted is missing, therefore using the isOpen property to check if the restaurant is promoted or not. This is just for demonstration purposes, in real application we should use the promoted property to check if the restaurant is promoted or not. */}
+                <RestaurantCardPromoted resData={restaurant} />
+            ) : (
+                <RestaurantCard resData={restaurant} />
+            )}
         </Link>
 ))}    
 
