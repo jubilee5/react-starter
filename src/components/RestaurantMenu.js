@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import Shimmer from "./Shimmer";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
+import RestaurantCategory from "./RestaurantCategory";
 
 const RestaurantMenu = () => {
     const {resId} = useParams(); // this is a dummy restaurant id. We will get the actual restaurant id from the url when we click on a restaurant card. We can use useParams hook from react-router-dom to get the restaurant id from the url.
@@ -22,31 +23,32 @@ const regularCards =
         (card) => card?.groupedCard
     )?.groupedCard?.cardGroupMap?.REGULAR?.cards;
 
-const itemCards =
-    regularCards
-        ?.filter(
-            (c) =>
-                c?.card?.card?.itemCards
-        )
-        ?.flatMap(
-            (c) => c.card.card.itemCards
-        );
+const categories =
+    regularCards?.filter(
+        (c) =>
+            c?.card?.card?.["@type"] ===
+            "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    );
 
   return  (
-    <div className="menu">
-        <h1> {name} </h1>
-        <h2> {cuisines?.join(", ")} </h2>
-        <ul>
-            {itemCards?.map((item, index) => (
-                <li key={item.card.info.id + "-" + index}>{item.card.info.name} - {item.card.info.price || item.card.info.defaultPrice}
-                 </li>
-                   
-            ))}
-        </ul>
-      
-    </div>
-  )
-}
+    <div className="text-center">
+        <h1 className="font-bold my-6 text-2xl"> {name} </h1>
+       <p className="font-semibold text-lg">
+                {cuisines?.join(", ")} - {costForTwoMessage}
+            </p>
+
+            <div>
+                {categories?.map((category) => (
+                    <RestaurantCategory
+                        key={category?.card?.card?.title}
+                        data={category?.card?.card}
+                    />
+                ))}
+            </div>
+        </div>
+    );
+};
+
 
 export default RestaurantMenu
 
