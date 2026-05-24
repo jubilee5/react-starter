@@ -1,4 +1,4 @@
-import React , {lazy, Suspense} from "react";
+import React , {lazy, Suspense, useContext} from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter , Outlet, RouterProvider } from "react-router-dom";
 import Header from "./components/Header";
@@ -8,6 +8,8 @@ import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 //import Grocery from "./components/Grocery";
+import UserContext from "./utils/UserContext";
+
 
 
 /***
@@ -26,10 +28,16 @@ const Grocery = lazy(() => import("./components/Grocery")); // this is a dynamic
 
 const AppLayout = () => {
     return (
-        <div className="app">
-            <Header />
-            <Outlet />   {/* This is where the children components will be rendered */}
-        </div>
+        <UserContext.Provider value={{ loggedInUser: "John Doe" }}>   
+        {/*  we are providing the value for the context here. This value can be accessed by any component in the app that is wrapped by this provider. In this case, we are wrapping our entire app with this provider, so any component in the app can access the loggedInUser value from the context. provider is a component that is used to provide the value for the context.  */}
+            <div className="app">
+                {/* <UserContext.Provider value={{ loggedInUser: "Jubilee" }}> */}
+                   {/*  we can have multiple providers for the same context in the component tree. In this case, we have two providers for the UserContext - one with the value "John Doe" and another with the value "Jubilee". The value that will be accessed by the components will be the one from the nearest provider in the component tree. So, in this case, the components will access the value "Jubilee" from the nearest provider. This is because of the way React's context API works. It will look for the nearest provider in the component tree and use its value. If there is no provider, it will use the default value defined in the createContext() function.  */}
+                <Header />
+                {/* </UserContext.Provider> */}
+                <Outlet />   {/* This is where the children components will be rendered */}
+            </div>
+        </UserContext.Provider>
     );
 };
 
