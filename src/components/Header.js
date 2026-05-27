@@ -3,6 +3,7 @@ import { useState, useContext  } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux"; 
 
 
 // if no dependency array => useEffect will be called on every render
@@ -19,10 +20,15 @@ const Header = () => {
     const { loggedInUser } = useContext(UserContext);
     console.log(loggedInUser);
 
+//subscribing to the store using a selector -  selector is a hook inside react. 
+    const cartItems = useSelector((store) => store.cart.items); // this is how we can access the state from the store in our components. useSelector is a hook that allows us to extract data from the Redux store state, using a selector function. The selector function receives the entire store state as its only argument and should return the part of the state that we want to access.
+    console.log(cartItems); 
+   
+
     return (
         <div className="flex justify-between bg-pink-50 shadow-lg ">
             <div className="logo-container">
-                <img className="w-16 " src={LOGO_URL} alt="logo"/>
+                <img className="w-20 p-4 justify-content m-2" src={LOGO_URL} alt="logo"/>
             </div>
             <div className="flex items-center">
                 <ul className="flex p-4 m-4">
@@ -39,8 +45,8 @@ const Header = () => {
                     <li className="px-4">
                         <Link to="/grocery">Grocery</Link>
                     </li>
-                    <li className="px-4">
-                        <Link to="/cart">Cart</Link>
+                    <li className="px-4 font-bold">
+                        <Link to="/cart">Cart - ({cartItems.length} items)</Link>
                     </li>
                     <button className="login" onClick={() => {
                         btnName === "Login" 

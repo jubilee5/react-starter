@@ -42,3 +42,13 @@ import {Component } from "path";
 Only data/UI changes.
 - server side routing - Every time you change page, request goes to server.
 The server sends a completely new HTML page.Browser reloads entire page.
+
+
+# Redux Toolkit
+
+ - Install @reduxjs/toolkit and react-redux
+ - build our store
+ - connect our store to our app
+ - slice (cartSlice)
+ - dispatch (action) 
+ - Selector 

@@ -63,7 +63,7 @@ const {loggedInUser, setUserName} = useContext(UserContext);
 
     return listOfRestaurants.length === 0 ? <Shimmer/> : (      //using ternary operator for conditional rendering.
         <div className="body">
-            <div className="filter flex  items-center">
+            <div className="filter flex  items-center ">
                 <div className="search m-4 p-4">
                     <input type="text" 
                     className=" border border-solid border-black"
