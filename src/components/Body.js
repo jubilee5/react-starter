@@ -1,9 +1,10 @@
 import RestaurantCard, {withPromotedLabel} from "./RestaurantCard";
-import { useState , useEffect } from "react";
+import { useState , useEffect, useContext } from "react";
 //import resList from "../utils/mockData";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 
 const Body = () => {
@@ -51,6 +52,7 @@ if (onlineStatus === false) {
         <h1> Looks like you are offline. Please check your internet connection. </h1>
     );
 }
+const {loggedInUser, setUserName} = useContext(UserContext);
 
 // Conditional rendering - if restaurant list is empty then show shimmer UI otherwise show the restaurant cards. This is a common pattern in React applications to show a loading state while the data is being fetched. We can also show an error message if there is an error while fetching the data.
 // if (listOfRestaurants.length === 0) {
@@ -87,6 +89,7 @@ if (onlineStatus === false) {
                         }}>
                         Search</button>
                 </div>
+
                 <button 
                     className="px-2 m-2 bg-gray-100 rounded-lg"
                     onClick={() => {
@@ -98,7 +101,15 @@ if (onlineStatus === false) {
                 >
                     Top Rated Restaurants
                     </button>
+           
+            <div className="search m-4 p-4 flex items-center">
+                <label>UserName: </label>
+                <input className="border border-black px-2" 
+                value={loggedInUser}
+                onChange={(e) => setUserName(e.target.value)}
+                />
             </div>
+             </div>
             <div className="flex flex-wrap"> 
                    {filteredRestaurant
     ?.filter((restaurant) => restaurant?.info?.id)

@@ -1,4 +1,4 @@
-import React , {lazy, Suspense, useContext} from "react";
+import React , {lazy, Suspense, use, useContext, useState, useEffect} from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter , Outlet, RouterProvider } from "react-router-dom";
 import Header from "./components/Header";
@@ -27,8 +27,20 @@ const Grocery = lazy(() => import("./components/Grocery")); // this is a dynamic
 
 
 const AppLayout = () => {
+
+    const [userName, setUserName] = useState();
+
+    //authetication
+    useEffect(() => {
+        const data = {
+            name: "Jubilee Sharma"
+        };
+
+        setUserName(data.name);
+    }, []); 
+
     return (
-        <UserContext.Provider value={{ loggedInUser: "John Doe" }}>   
+        <UserContext.Provider value={{ loggedInUser: userName , setUserName}}>   
         {/*  we are providing the value for the context here. This value can be accessed by any component in the app that is wrapped by this provider. In this case, we are wrapping our entire app with this provider, so any component in the app can access the loggedInUser value from the context. provider is a component that is used to provide the value for the context.  */}
             <div className="app">
                 {/* <UserContext.Provider value={{ loggedInUser: "Jubilee" }}> */}
