@@ -11,6 +11,7 @@ import RestaurantMenu from "./components/RestaurantMenu";
 import UserContext from "./utils/UserContext";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
+import Cart from "./components/Cart";
 
 
 
@@ -91,6 +92,10 @@ const appRouter = createBrowserRouter([
              {
                 path: "/restaurant/:resId", // dynamic route for restaurant details page. :resId is a placeholder for the actual restaurant id which will be passed in the url when we click on a restaurant card.
                 element: <RestaurantMenu />
+            },
+            {
+                path: "/cart",
+                element: <Cart />
             }
         ],
         errorElement: <Error />

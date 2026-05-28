@@ -1,6 +1,16 @@
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice";
 import { CON_URL } from "../utils/constants";
 const ItemList = ({items, dummy}) => {
         // console.log(dummy);
+
+        const dispatch = useDispatch(); // this is a hook that allows us to dispatch actions to the store. It returns a reference to the dispatch function from the Redux store. We can use it to dispatch actions as needed. In this case, we will use it to dispatch an action to add an item to the cart when the user clicks on the "Add +" button.
+
+    const handleAddItem = (item) => {
+        // dispatch an action to add item to the cart
+        dispatch(addItem(item));
+
+        }
   return (
     <div>
         {items?.map((item) => (
@@ -19,7 +29,9 @@ const ItemList = ({items, dummy}) => {
                 
                 </div>
                 <div className="w-3/12">
-                <button className="bg-green-500 text-white px-4 py-2 rounded">
+                <button className="bg-green-500 text-white px-4 py-2 rounded shadow-lg cursor-pointer"
+                onClick= {() => handleAddItem(item)}
+                >
                     Add +
                 </button>
                 <img className="h-24 w-full object-cover rounded" src={CON_URL + item?.card?.info?.imageId} alt={item?.card?.info?.name} />

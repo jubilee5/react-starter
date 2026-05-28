@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
 import { useSelector } from "react-redux"; 
+//import logo_food from "../assets/logo_food.png";
 
 
 // if no dependency array => useEffect will be called on every render
@@ -28,7 +29,7 @@ const Header = () => {
     return (
         <div className="flex justify-between bg-pink-50 shadow-lg ">
             <div className="logo-container">
-                <img className="w-20 p-4 justify-content m-2" src={LOGO_URL} alt="logo"/>
+                <img className="w-20 p-4 justify-content m-2" src={LOGO_URL} alt="logo"/>        
             </div>
             <div className="flex items-center">
                 <ul className="flex p-4 m-4">
