@@ -5,6 +5,9 @@ import { useDispatch } from "react-redux";
 
 
 const Cart = () => {
+    // const store = useSelector ((store) => store);
+    // const cartItems = store.cart.items
+    // dont use the above way of subscribing to a store . as it subscribes to the entire store which is not needed for us. use the below way of subscribing only to the specific slice.
     const cartItems = useSelector((store) => store.cart.items);
 
     const dispatch = useDispatch();

@@ -28,3 +28,15 @@ export default cartSlice.reducer;
 // name: a string that is used to identify the slice. This will be used as the prefix for the action types.
 // initialState: the initial state of the slice. This can be an object, array, or any other data type.
 // reducers: an object that contains the reducer functions for the slice. Each reducer function takes the current state and an action as arguments and returns the new state. The keys of this object will be used as the action types for the slice.
+
+
+
+
+// vanilla redux(older) => Dont mutate state , returning was mandatory
+// const newState = [...state];
+// newstate.items.push(action.payload);
+// return newState;
+
+// Redux Toolkit 
+// we have to mutate the state
+// state.items.push(action.payload);

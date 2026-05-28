@@ -15,7 +15,7 @@ export default appStore;
 
 
 
-
+//here we use keyword "reducer" as it is the whole big reducer that holds all the reducers. but when we are creating a slice there can be multiple small reducers therefore we use the keyword "reducers"
 
 
 
