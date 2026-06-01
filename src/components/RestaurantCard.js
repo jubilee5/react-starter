@@ -11,19 +11,20 @@ const RestaurantCard = (props) => {
         costForTwo, 
         rating, 
         sla,
-        } = resData?.info || {};    // Destructuring props for better readability
+        } = resData?.info || {};   // Destructuring props for better readability
     
     
         return (
-        <div className="m-4 p-4 w-62.5  bg-gray-100 rounded-lg hover:bg-gray-200" >
-             <img 
-            className="rounded-lg h-40 w-full object-cover" src = {CON_URL + cloudinaryImageId} alt="res-logo"
+      <div className="w-full bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 cursor-pointer">
+            <img
+            className="h-48 w-full object-cover" src = {CON_URL + cloudinaryImageId} alt="res-logo"
              />
-            <h3 className="font-bold py-4 text-lg line-clamp-2">{name}</h3>
-            <h4 className="line-clamp-2 text-sm">{cuisines?.join(", ")}</h4>
-            <h4>{avgRating} stars</h4>
-            <h4>{costForTwo} </h4>
-            <h4>{sla?.slaString} </h4>     {/* delivery time */}
+            <h3 className="font-bold text-lg px-4 pt-3 line-clamp-2 text-gray-800 min-h-[52px] ">{name}</h3>
+            <h4 className="px-4 mt-1 text-gray-500 text-sm line-clamp-2 min-h-[38px]">{cuisines?.join(", ")}</h4>
+            <h4 className="px-4 mt-2 font-semibold text-green-600">
+               ⭐{avgRating} stars</h4>
+            <h4 className="px-4 mt-1 text-gray-700">{costForTwo} </h4>
+            <h4 className="px-4 pb-4 mt-1 text-gray-600"> 🚴🏻‍♀️{sla?.slaString} </h4>     {/* delivery time */}
         </div>
     );
 };

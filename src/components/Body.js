@@ -63,10 +63,17 @@ const {loggedInUser, setUserName} = useContext(UserContext);
 
     return listOfRestaurants.length === 0 ? <Shimmer/> : (      //using ternary operator for conditional rendering.
         <div className="body">
-            <div className="filter flex  items-center ">
+         <div className="px-6 pt-6 pb-0">
+  <h1 className="text-3xl font-extrabold text-gray-800">
+    Restaurants Near You
+  </h1>
+
+  <div className="w-24 h-1 bg-pink-500 rounded-full mt-1"></div>
+</div>
+            <div className="flex flex-wrap items-center justify-between bg-white shadow-md rounded-2xl mx-6  py-4">
                 <div className="search m-4 p-4">
                     <input type="text" 
-                    className=" border border-solid border-black"
+                    className=" w-72 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent"
                     placeholder="Search for restaurants..." 
                     value={searchText} 
                     onChange={(e) => {
@@ -77,7 +84,7 @@ const {loggedInUser, setUserName} = useContext(UserContext);
                      value is the current value of the input field 
                      onChange is called when the user types in the input field
                      e.target.value is the new value of the input field */}
-                    <button className="px-2 m-2 bg-green-100 rounded-lg"
+                    <button className="ml-3 px-5 py-2 text-white bg-pink-500 rounded-lg font-medium hover:bg-pink-600 transition"
                         onClick={() => {
                             //filter restaurant cards based on search text and update the ui
                         console.log(searchText);
@@ -91,27 +98,42 @@ const {loggedInUser, setUserName} = useContext(UserContext);
                 </div>
 
                 <button 
-                    className="px-2 m-2 bg-gray-100 rounded-lg"
+                    className="px-5 py-2 bg-green-700 text-white rounded-lg font-medium hover:bg-green-600 transition"
                     onClick={() => {
                     const filteredlist = listOfRestaurants.filter(
-                        (res) => res.info.avgRating > 4.0
+                        (res) => res.info.avgRating > 4.5
                     );
-                    setListOfRestaurants(filteredlist);
+                    setFilteredRestaurant(filteredlist);
                 }}
                 >
-                    Top Rated Restaurants
+                   ⭐️ Top Rated Restaurants
                     </button>
            
-            <div className="search m-4 p-4 flex items-center">
-                <label>UserName: </label>
-                <input className="border border-black px-2" 
+            <div className=" gap-3 flex items-center m-4 p-4">
+                <label className="font-medium text-gray-700"> 👤 User </label>
+                <input className=" px-4
+                                        py-2
+                                        border
+                                        border-gray-300
+                                        rounded-lg
+                                        focus:outline-none
+                                        focus:ring-2
+                                        focus:ring-pink-400" 
                 value={loggedInUser}
                 onChange={(e) => setUserName(e.target.value)}
                 />
             </div>
              </div>
-            <div className="flex flex-wrap"> 
-                   {filteredRestaurant
+            <div className=" grid
+                            grid-cols-1
+                            sm:grid-cols-2
+                            md:grid-cols-3
+                            lg:grid-cols-4
+                            xl:grid-cols-5
+                            gap-6
+                            px-6
+                            py-4"> 
+         {filteredRestaurant
     ?.filter((restaurant) => restaurant?.info?.id)
    ?.map((restaurant) => (
         <Link
